@@ -1,0 +1,389 @@
+
+
+h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Container da página */
+.dados {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.boasVindas {
+  margin-bottom: 20px;
+}
+
+.boasVindasTexto {
+  font-size: 16px;
+  color: #555;
+}
+
+.subtitulo {
+    margin-top: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.inputFilterContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.inputFilter {
+  padding: 10px;
+  width: 45%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.inputFilter:focus {
+  outline: none;
+  border-color: #FF4200;
+  background-color: #fff;
+}
+
+#tableView {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#tableView th,
+#tableView td {
+  padding: 10px;
+  text-align: left;
+}
+
+#tableView th {
+  background-color: #3d475138;
+    color: rgba(17, 17, 17, 0.794) !important;
+}
+
+#tableView tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#tableView tr:hover {
+  background-color: #f1f1f1;
+}
+
+#tableView td {
+  border-bottom: 1px solid #ddd;
+}
+
+#tableView td[colspan="4"] {
+  text-align: center;
+  font-style: italic;
+}
+
+.inputBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin-top: 15px;
+  width: 50%;
+
+  & label{
+    width: 100%;
+    text-align: start;
+
+  }
+}
+
+.inputBox select{
+  padding: 10px;
+  width: calc(100% + 20px);
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.inputBox a{
+  padding: 13px 10px;
+  width: calc(100%);
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+  background-color: #FF4200;
+}
+
+
+.inputBox button{
+  padding: 10px;
+  width: calc(100% + 20px);
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+  background-color: #FF4200;
+}
+
+
+
+.inputBox input{
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.inputBox input:focus {
+  outline: none;
+  border-color: #FF4200;
+  background-color: #fff;
+}
+
+
+.informativo{
+ color: #FF4200;
+ font-size: 12px; 
+}
+
+
+.formOpen{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.welcome-left h1{
+  font-size: 25px;
+  margin: 0;
+  font-weight: 700;
+  color: #111111;
+}
+
+.welcome-left span{
+  color: #111111b6;
+  font-weight: 300;
+}
+
+.buttonContainerReserva{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonContainerReserva button{
+  padding: 10px;
+  display: flex;
+  transition: .4s ease-in-out;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: calc(50% / 3);
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+
+
+.inputBox2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin-top: 15px;
+  width: 50%;
+
+  & label{
+    width: 100%;
+    text-align: start;
+
+  }
+}
+
+.inputBox2 select{
+  padding: 10px;
+  width: calc(100% + 20px);
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.inputBox2 button{
+  padding: 10px;
+  width: calc(100% + 20px);
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+  background-color: #FF4200;
+}
+
+
+
+.inputBox2 input{
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.inputBox2 input:focus {
+  outline: none;
+  border-color: #FF4200;
+  background-color: #fff;
+}
+
+
+.inputBoxNone{
+  display: none;
+}
+
+.buttonContainerReserva button.active {
+  transition: .4s ease-in-out;
+  border: 1px solid white;
+  background-color: #FF4200;
+  color: white;
+}
+
+@media only screen and (max-width: 758px) {
+  .buttonContainerReserva{
+    display: flex;
+    flex-direction: column;
+  }
+  .buttonContainerReserva button{
+    padding: 10px;
+    width: calc(80% + 20px);
+    display: flex;
+    transition: .4s ease-in-out;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .modal{
+    width: 80% !important;
+  }
+  
+
+  .inputBox{
+    width: 80%;
+  }
+}
+
+
+
+.modal-container{
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  padding-top: 20px;
+  align-items: start;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.349);
+}
+
+.modal{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+  box-sizing: border-box;
+    margin: 0;
+    border: 0 solid;
+    box-shadow: 0 20px 25px -5px  rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.modal h1{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal p{
+  width: 95%;
+}
+
+.modal button{
+  width: 95%;
+  background-color: #FF4200;
+  text-decoration: none;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+
+.checkIcon{
+  font-size: 30px;
+  padding: 10px;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: oklch(0.627 0.194 149.214);
+  background-color: oklch(0.962 0.044 156.743);
+}
+
+.diferente{
+  color: #FF4200;
+  font-weight: 600;
+}
+
+.ajuda{
+  color: #FF4200 !important;
+  font-size: 15px;
+  background: none !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.anexo{
+  display: flex;
+  width: 100% !important;
+  align-items: center;
+  justify-content: start;
+}
+
+.anexo span{
+  width: 20% !important;
+}
+
+
+.enviar{
+  margin-bottom: 30px !important;
+}

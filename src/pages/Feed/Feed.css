@@ -1,0 +1,87 @@
+
+
+h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Container da página */
+.dados {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.boasVindas {
+  margin-bottom: 20px;
+}
+
+.boasVindasTexto {
+  font-size: 16px;
+  color: #555;
+}
+
+.subtitulo {
+    margin-top: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.inputFilterContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.inputFilter {
+  padding: 10px;
+  width: 45%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.inputFilter:focus {
+  outline: none;
+  border-color: #FF4200;
+  background-color: #fff;
+}
+
+#tableView {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#tableView th,
+#tableView td {
+  padding: 10px;
+  text-align: left;
+}
+
+#tableView th {
+  background-color: #3d475138;
+    color: rgba(17, 17, 17, 0.794) !important;
+}
+
+#tableView tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#tableView tr:hover {
+  background-color: #f1f1f1;
+}
+
+#tableView td {
+  border-bottom: 1px solid #ddd;
+}
+
+#tableView td[colspan="4"] {
+  text-align: center;
+  font-style: italic;
+}
