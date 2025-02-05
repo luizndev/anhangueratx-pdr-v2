@@ -17,6 +17,11 @@ const Login = () => {
   const [role, setRole] = useState("");
   const navigate = useNavigate();
 
+  // Redireciona para o link externo quando o componente for montado
+  useEffect(() => {
+    window.location.href = "https://anhangueratx-pdr.vercel.app/"; // Substitua pelo seu link externo desejado
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
