@@ -385,12 +385,45 @@ const InformaticaForm = ({ id }) => {
     software: "",
     equipamento: "",
     observacao: "",
-    // token: "",
     status: "Não",
   });
 
   const [message, setMessage] = useState("");
   const [errorDetails, setErrorDetails] = useState("");
+  const [availableLabs, setAvailableLabs] = useState([]);
+  
+
+  const labRestrictions = {
+    'Laboratório 5 (Informatica Avançada)': [2, 3], 
+    'Laboratório 8 (Informatica Avançada)': [1, 3 ,4], 
+    // 0 - Segunda
+    // 1 - Terça
+  };
+
+  const allLabs = [
+    { value: "Laboratório 1 (Informatica Básica)", label: "Laboratório 1 (Informatica Básica)" },
+    { value: "Laboratório 2 (Informatica Básica)", label: "Laboratório 2 (Informatica Básica)" },
+    { value: "Laboratório 5 (Informatica Avançada)", label: "Laboratório 5 (Informatica Avançada)" },
+    { value: "Laboratório 8 (Informatica Avançada)", label: "Laboratório 8 (Informatica Avançada)" },
+    { value: "Laboratório 9 (Informatica Avançada)", label: "Laboratório 9 (Informatica Avançada)" },
+  ];
+
+  const updateAvailableLabs = (selectedDate) => {
+    if (!selectedDate) {
+      setAvailableLabs([]);
+      return;
+    }
+
+    const date = new Date(selectedDate);
+    const dayOfWeek = date.getDay();
+
+    const availableLaboratories = allLabs.filter(lab => {
+      const restrictions = labRestrictions[lab.value];
+      return !restrictions || !restrictions.includes(dayOfWeek);
+    });
+
+    setAvailableLabs(availableLaboratories);
+  };
 
   useEffect(() => {
     if (id) {
@@ -434,12 +467,16 @@ const InformaticaForm = ({ id }) => {
 
       if (selectedDate < minDate) {
         const formattedMinDate = minDate.toISOString().split("T")[0];
-        setFormData({ ...formData, [name]: formattedMinDate });
+        setFormData({ ...formData, [name]: formattedMinDate, laboratorio: "" });
+        updateAvailableLabs(formattedMinDate);
         return;
       }
-    }
 
-    setFormData({ ...formData, [name]: value });
+      setFormData({ ...formData, [name]: value, laboratorio: "" });
+      updateAvailableLabs(value);
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -533,35 +570,25 @@ const InformaticaForm = ({ id }) => {
           disponibilidade.
         </label>
       </div>
-      <div className="inputBox">
-        <label htmlFor="">Laboratório</label>
-        <select
-          name="laboratorio"
-          value={formData.laboratorio}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Selecione uma opção</option>
-          <option value="Laboratório 1 (Informatica Básica)">
-            Laboratório 1 (Informatica Básica)
-          </option>
-          <option value="Laboratório 2 (Informatica Básica)">
-            Laboratório 2 (Informatica Básica)
-          </option>
-          <option value="Laboratório 3 (Informatica Básica)">
-            Laboratório 3 (Informatica Básica)
-          </option>
-          <option value="Laboratório 5 (Informatica Avançada)">
-            Laboratório 5 (Informatica Avançada)
-          </option>
-          <option value="Laboratório 8 (Informatica Avançada)">
-            Laboratório 8 (Informatica Avançada)
-          </option>
-          <option value="Laboratório 9 (Informatica Avançada)">
-            Laboratório 9 (Informatica Avançada)
-          </option>
-        </select>
-      </div>
+      
+      {formData.data && (
+        <div className="inputBox">
+          <label htmlFor="">Laboratório</label>
+          <select
+            name="laboratorio"
+            value={formData.laboratorio}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecione uma opção</option>
+            {availableLabs.map((lab) => (
+              <option key={lab.value} value={lab.value}>
+                {lab.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       <div className="inputBox">
         <label htmlFor="">Software </label>
         <input

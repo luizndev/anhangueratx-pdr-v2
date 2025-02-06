@@ -5,9 +5,26 @@ import { MdEmail } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BiSolidErrorAlt } from "react-icons/bi";
-
-// IMPORTAÇÃO DE STYLE
+import { GoCheckCircle } from "react-icons/go";
 import "./Login.css";
+
+const LoadingModal = () => (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <div className="loading-spinner"></div>
+      <p>Autenticando...</p>
+    </div>
+  </div>
+);
+
+const SuccessModal = () => (
+  <div className="modal-overlay">
+    <div className="modal-content success">
+    <GoCheckCircle />
+      <p>Logado com sucesso!</p>
+    </div>
+  </div>
+);
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,43 +32,63 @@ const Login = () => {
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [esqueci, setEsqueci] = useState(false);
+  const [formDataEmail, setFormDataEmail] = useState({ email: "" });
   const navigate = useNavigate();
 
-  // Redireciona para o link externo quando o componente for montado
-  useEffect(() => {
-    window.location.href = "https://anhangueratx-pdr.vercel.app/"; // Substitua pelo seu link externo desejado
-  }, []);
+  const handleSubmitEmail = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await axios.post("http://localhost/auth/recover", {
+        email: formDataEmail.email,
+      });
+
+      if (response.status === 200) {
+        alert("E-mail enviado com sucesso! Verifique sua caixa de entrada.");
+        setEsqueci(false);
+        setFormDataEmail({ email: "" });
+      }
+    } catch (error) {
+      setError("Erro ao registrar formulário");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
+    setError("");
 
     try {
       const response = await axios.post(
         "https://pdr-auth-ofc.vercel.app/auth/login",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
 
       if (response.status === 200) {
-        const idVerify = response.data.userId;
-        const token = response.data.token;
-        localStorage.setItem("token", token);
-        localStorage.setItem("id", idVerify);
+        const { userId, token } = response.data;
 
+        localStorage.setItem("token", token);
+        localStorage.setItem("id", userId);
         sessionStorage.setItem("isLoggedIn", "true");
 
-        fetchData(idVerify, token);
-
-        navigate(`/inicio`);
+        await fetchData(userId, token);
+        setIsLoading(false);
+        setIsSuccess(true);
+        
+        setTimeout(() => {
+          navigate('/inicio');
+        }, 1200);
       }
     } catch (error) {
-      if (error.response) {
-        setError(error.response.data.message);
-      } else {
-        setError("Erro ao logar. Tente novamente.");
-      }
+      setIsLoading(false);
+      setError(
+        error.response ? error.response.data.message : "Erro ao logar. Tente novamente."
+      );
     }
   };
 
@@ -60,9 +97,7 @@ const Login = () => {
       const response = await axios.get(
         `https://pdr-auth-ofc.vercel.app/auth/${id}`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
@@ -83,7 +118,6 @@ const Login = () => {
 
   useEffect(() => {
     const id = localStorage.getItem("id");
-
     if (!id) {
       navigate("/login");
     }
@@ -91,18 +125,24 @@ const Login = () => {
 
   return (
     <div className="container-login">
+      {isLoading && <LoadingModal />}
+      {isSuccess && <SuccessModal />}
+      
       <header>
-        <img src="./Logotype.svg" alt="" />
+        <img src="./Logotype.svg" alt="Logo" />
       </header>
+      
       <div className="right">
         <form className="logincontainer" onSubmit={handleSubmit}>
           <h1>Entrar</h1>
           <h2>Portal de Reservas</h2>
+          
           {error && (
             <p className="error-message">
               <BiSolidErrorAlt /> {error}
             </p>
           )}
+          
           <div className="inputType">
             <MdEmail className="icone" />
             <input
@@ -128,15 +168,25 @@ const Login = () => {
               required
             />
           </div>
+          
           <div className="containerButton">
-            <button className="submit" type="submit">
-              Entrar
+            <button 
+              className="submit" 
+              type="submit" 
+              disabled={isLoading}
+            >
+              {isLoading ? "Entrando..." : "Entrar"} <FaChevronRight />
             </button>
           </div>
+          
           <div className="dicas">
-            <Link to="#" className="esqueciminha">
+            <button 
+              type="button"
+              className="esqueciminha" 
+              onClick={() => setEsqueci(true)}
+            >
               Esqueci minha senha
-            </Link>
+            </button>
             <div className="criarConta">
               <p>Não tem uma conta?</p>
               <Link to="/register">Criar sua conta</Link>
@@ -144,6 +194,7 @@ const Login = () => {
           </div>
         </form>
       </div>
+
       <footer>
         <span>
           Precisa de ajuda? Por favor, envie um e-mail para:
@@ -152,6 +203,36 @@ const Login = () => {
           </Link>
         </span>
       </footer>
+
+      {esqueci && (
+        <div className="modal-container2">
+          <div className="modal2">
+            <h1>Esqueci minha senha</h1>
+            <p>
+              Olá! Para enviarmos sua senha, por favor, digite seu e-mail. 
+              Você a receberá diretamente na sua caixa de entrada. 📩
+            </p>
+            <form onSubmit={handleSubmitEmail}>
+              <div className="inputType2">
+                <MdEmail className="icone" />
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="E-mail"
+                  value={formDataEmail.email}
+                  onChange={(e) =>
+                    setFormDataEmail({ ...formDataEmail, email: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <button type="submit">Receber via e-mail</button>
+            </form>
+            <button onClick={() => setEsqueci(false)}>Fechar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
