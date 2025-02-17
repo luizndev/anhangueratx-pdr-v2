@@ -396,6 +396,7 @@ const InformaticaForm = ({ id }) => {
   const labRestrictions = {
     'Laboratório 5 (Informatica Avançada)': [2, 3], 
     'Laboratório 8 (Informatica Avançada)': [1, 3 ,4], 
+    'Laboratório 9 (Informatica Avançada)': [1, 3 ,4], 
     // 0 - Segunda
     // 1 - Terça
   };
