@@ -106,13 +106,17 @@ const MultidisciplinarForm = ({ id }) => {
         tema: "",
         roteiro: "",
         observacao: "",
-        // token: generateTokenLab(),
         status: "",
       });
     } catch (error) {
-      setErrorDetails("Erro ao registrar formulário");
+      if (error.response && error.response.data) {
+        setErrorDetails(error.response.data.message || "Erro ao registrar formulário");
+      } else {
+        setErrorDetails("Erro desconhecido");
+      }
     }
   };
+  
 
   return (
     <form className="formOpen" onSubmit={handleSubmit}>
@@ -490,7 +494,7 @@ const InformaticaForm = ({ id }) => {
         { ...formData, token }
       );
       setMessage(response.data.message);
-      setErrorDetails("");
+      setErrorDetails(""); // Limpar mensagem de erro
       setFormData({
         professor: "",
         email: "",
@@ -501,13 +505,17 @@ const InformaticaForm = ({ id }) => {
         software: "",
         equipamento: "",
         observacao: "",
-        // token: tokenInput,
         status: "",
       });
     } catch (error) {
-      setErrorDetails("Erro ao registrar formulário");
+      if (error.response && error.response.data) {
+        setErrorDetails(error.response.data.message || "Erro ao registrar formulário");
+      } else {
+        setErrorDetails("Erro desconhecido");
+      }
     }
   };
+  
 
   return (
     <form className="formOpen" onSubmit={handleSubmit}>
@@ -730,7 +738,7 @@ function App() {
 const generateTokenTI = () => {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let token = "INFO-";
+  let token = "IT-";
   for (let i = 0; i < 6; i++) {
     token += characters.charAt(Math.floor(Math.random() * characters.length));
   }
