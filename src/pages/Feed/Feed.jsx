@@ -13,7 +13,7 @@ function App() {
     if (isLoggedIn !== "true") {
       navigate("/login");
     } else {
-      fetchRecentClasses(); // Garante que só executa se o usuário estiver logado
+      fetchRecentClasses();
     }
   }, [navigate]);
 
