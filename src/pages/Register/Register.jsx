@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiSolidErrorAlt } from "react-icons/bi";
 import "./Register.css";
 
-// Loading Modal Component
 const LoadingModal = () => (
   <div className="loading-modal-overlay">
     <div className="loading-modal">
@@ -51,7 +50,6 @@ const Register = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    // Verificação de senhas
     if (senha !== confirmarSenha) {
       setError("As senhas não são iguais.");
       setIsLoading(false);
