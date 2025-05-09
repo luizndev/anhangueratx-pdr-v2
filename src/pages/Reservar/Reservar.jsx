@@ -349,11 +349,10 @@ const MultidisciplinarForm = ({ id }) => {
         />
       </div>
        <div className="inputBox">
-        <input
+        <label htmlFor=""><input
           type="checkbox"
           required
-        />
-        <label htmlFor="">Declaro estar ciente da obrigatoriedade do uso de Equipamentos de Proteção Individual (EPI), tanto por mim quanto por meus alunos, durante todas as atividades que assim o exigirem.</label>
+        /> Declaro estar ciente da obrigatoriedade do uso de Equipamentos de Proteção Individual (EPI), tanto por mim quanto por meus alunos, durante todas as atividades que assim o exigirem.</label>
       </div>
       <div className="inputBox">
         <button type="submit" className="enviar">
