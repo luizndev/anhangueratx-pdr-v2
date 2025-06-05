@@ -1,8 +1,25 @@
-# React + Vite
+# Portal de Reservas (Anhanguera)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Otimizando em 80% no processo de reserva de espaços no campus, seja ela Informática, Gerais ou Equipamento.
 
-Currently, two official plugins are available:
+## Stacks utilizadas
+- JavaScript
+- ReactJS
+- NodeJS (ExpressJS)
+- MongoDB
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
+- Sistema de Auth (Login/Register)
+- Consulta a Banco de Dados
+- Sistema de registro de reservas com verificação de dia e espaço (para não haver confflitos)
+- Sistema de visualização das reservas mediante ao setor
+
+```bash
+# Clone o repositório
+git clone https://github.com/luizndev/anhangueratx-pdr-v2.git
+
+# Instale as dependências
+npm i 
+
+# Rode o projeto
+npm start
