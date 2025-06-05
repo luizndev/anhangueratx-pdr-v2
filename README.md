@@ -2,6 +2,8 @@
 
 Otimizando em 80% no processo de reserva de espaços no campus, seja ela Informática, Gerais ou Equipamento.
 
+<img src="]https://i.imgur.com/SvyAzil.gif" alt="logo nodejs"  />
+
 Plataforma Online: https://anhangueratx-pdr-v2.vercel.app
 
 ## Stacks utilizadas
